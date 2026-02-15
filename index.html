@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferie e Permessi - Gestione Ferie Aziendale Semplice e Veloce</title>
+    <meta name="description" content="Ferie e Permessi è l'app completa per gestire ferie, permessi e assenze nella tua azienda. Prova gratuita di 14 giorni.">
+    <meta name="keywords" content="gestione ferie, permessi aziendali, app ferie, software hr, gestione assenze">
+    <link rel="icon" type="image/jpeg" href="logo_ferie_permessi.jpg">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ferie e Permessi - Gestione Ferie Aziendale">
+    <meta property="og:description" content="L'app completa per gestire ferie, permessi e assenze nella tua azienda.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.ferie-e-permessi.it">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1e293b;
+            --primary-light: #334155;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--white);
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--primary);
+            background: var(--bg-light);
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+            color: var(--white);
+        }
+        
+        .btn-accent:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+        
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 8rem 1.5rem 5rem;
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+        
+        .hero-content h1 span {
+            color: var(--accent);
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+        
+        .trial-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #ecfdf5;
+            color: #059669;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .phone-mockup {
+            position: relative;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+        
+        .phone-frame {
+            background: var(--primary);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .phone-screen {
+            background: var(--white);
+            border-radius: 30px;
+            overflow: hidden;
+            aspect-ratio: 9/19;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .store-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .store-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .store-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        .store-btn i {
+            font-size: 1.5rem;
+        }
+        
+        .store-btn-text {
+            text-align: left;
+        }
+        
+        .store-btn-text small {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            display: block;
+        }
+        
+        .store-btn-text span {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .store-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .store-btn.disabled:hover {
+            transform: none;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 1.5rem;
+            background: var(--white);
+        }
+        
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+        
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* How it Works Section */
+        .how-it-works {
+            padding: 6rem 1.5rem;
+            background: var(--bg-light);
+        }
+        
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -1rem;
+            width: calc(100% - 80px);
+            height: 2px;
+            background: var(--border);
+        }
+        
+        .step:last-child::after {
+            display: none;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        .step p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 6rem 1.5rem;
+            background: var(--white);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--accent);
+            background: linear-gradient(to bottom, #fffbeb, var(--white));
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        
+        .pricing-card .employees {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .pricing-features li i {
+            color: #10b981;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 1.5rem;
+            background: var(--bg-light);
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .faq-item {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        
+        .faq-item h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .faq-item h3 i {
+            color: var(--accent);
+            margin-top: 2px;
+        }
+        
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            padding-left: 1.75rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 6rem 1.5rem;
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .contact .section-header h2 {
+            color: var(--white);
+        }
+        
+        .contact .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .contact-content {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .contact-item a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 2rem 1.5rem;
+            background: #0f172a;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .footer p {
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .steps-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .step::after {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 1280px) {
+            .pricing-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-cta {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .trial-badge {
+                margin: 0 auto;
+            }
+            
+            .features-grid,
+            .faq-grid,
+            .pricing-grid,
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .phone-mockup {
+                max-width: 280px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="logo_ferie_permessi.jpg" alt="Ferie e Permessi">
+                <span class="logo-text">Ferie e Permessi</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#funzionalita">Funzionalità</a></li>
+                <li><a href="#come-funziona">Come Funziona</a></li>
+                <li><a href="#prezzi">Prezzi</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+            
+            <div class="nav-cta">
+                <a href="https://workleave-manager-2.preview.emergentagent.com/login" class="btn btn-outline">Accedi</a>
+                <a href="https://workleave-manager-2.preview.emergentagent.com/register" class="btn btn-primary">Prova Gratis</a>
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content animate-fade-in">
+                <div style="margin-bottom: 1.5rem; text-align: center;">
+                    <img src="logo_ferie_permessi.jpg" alt="Ferie e Permessi" style="height: 150px; width: auto; border-radius: 20px; box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2);">
+                </div>
+                <h1>Gestisci <span>Ferie e Permessi</span> in modo semplice</h1>
+                <p>L'app completa per digitalizzare la gestione delle ferie, permessi e assenze nella tua azienda. Tutto in un'unica piattaforma intuitiva.</p>
+                
+                <div class="hero-buttons">
+                    <a href="https://workleave-manager-2.preview.emergentagent.com/register" class="btn btn-accent">
+                        <i class="fas fa-rocket"></i>
+                        Inizia la Prova Gratuita
+                    </a>
+                    <a href="#funzionalita" class="btn btn-outline">
+                        <i class="fas fa-play-circle"></i>
+                        Scopri di più
+                    </a>
+                </div>
+                
+                <div class="trial-badge">
+                    <i class="fas fa-gift"></i>
+                    14 giorni di prova gratuita - Nessuna carta richiesta
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <img src="https://customer-assets.emergentagent.com/job_aea9fcf4-7192-4048-99b8-cf6b21f11caa/artifacts/1flrp8z8_Team.png" alt="App Ferie e Permessi">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="store-buttons">
+                    <a href="#" class="store-btn disabled" title="Prossimamente">
+                        <i class="fab fa-google-play"></i>
+                        <div class="store-btn-text">
+                            <small>Prossimamente su</small>
+                            <span>Google Play</span>
+                        </div>
+                    </a>
+                    <a href="#" class="store-btn disabled" title="Prossimamente">
+                        <i class="fab fa-apple"></i>
+                        <div class="store-btn-text">
+                            <small>Prossimamente su</small>
+                            <span>App Store</span>
+                        </div>
+                    </a>
+                    <a href="#" class="store-btn disabled" title="Prossimamente">
+                        <i class="fab fa-microsoft"></i>
+                        <div class="store-btn-text">
+                            <small>Prossimamente su</small>
+                            <span>Microsoft Store</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="funzionalita" class="features">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Funzionalità Principali</h2>
+                <p>Tutto ciò di cui hai bisogno per gestire le ferie e i permessi della tua azienda in modo efficiente</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Calendario Condiviso</h3>
+                    <p>Visualizza le ferie e i permessi di tutto il team in un calendario interattivo. Pianifica meglio le risorse.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <h3>Richieste Digitali</h3>
+                    <p>Invia e approva richieste di ferie e permessi con pochi clic. Addio ai moduli cartacei!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Gestione ferie residue</h3>
+                    <p>Monitora i giorni di ferie residui di ogni dipendente. Tutto aggiornato in tempo reale. Scegli se rendere visibile ai dipendenti il saldo delle ferie residue, o consentire loro solo l'invio delle richieste di ferie e permessi.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Notifiche Smart</h3>
+                    <p>Ricevi avvisi in-app e via email per nuove richieste, approvazioni e scadenze.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3>Multi-Ruolo</h3>
+                    <p>Accessi separati per Titolari, Amministrativi e Dipendenti con permessi personalizzati.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Disponibile Ovunque</h3>
+                    <p>Accedi da computer, tablet o smartphone. La tua gestione ferie sempre a portata di mano.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How it Works Section -->
+    <section id="come-funziona" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Come Funziona</h2>
+                <p>Inizia a gestire le ferie della tua azienda in 4 semplici passi</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Registra l'Azienda</h3>
+                    <p>Crea il tuo account come Titolare e configura le impostazioni aziendali</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Invita il Team</h3>
+                    <p>Condividi il codice aziendale con i tuoi dipendenti per la registrazione</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Gestisci le Richieste</h3>
+                    <p>I dipendenti inviano richieste, tu le approvi o rifiuti con un clic</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Monitora Tutto</h3>
+                    <p>Tieni sotto controllo ferie, permessi e saldi dal calendario condiviso</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section id="prezzi" class="pricing">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Prezzi Trasparenti</h2>
+                <p>Scegli il piano più adatto alla dimensione della tua azienda</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Base</h3>
+                    <div class="price">€9,90<span>/mese</span></div>
+                    <p class="employees"><i class="fas fa-users"></i> Fino a 5 dipendenti</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Calendario condiviso</li>
+                        <li><i class="fas fa-check"></i> Richieste ferie/permessi</li>
+                        <li><i class="fas fa-check"></i> Notifiche email</li>
+                        <li><i class="fas fa-check"></i> Gestione saldi</li>
+                        <li><i class="fas fa-check"></i> Supporto email</li>
+                    </ul>
+                    <a href="https://workleave-manager-2.preview.emergentagent.com/register" class="btn btn-outline" style="width: 100%;">Inizia Gratis</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Più Popolare</div>
+                    <h3>Standard</h3>
+                    <div class="price">€14,90<span>/mese</span></div>
+                    <p class="employees"><i class="fas fa-users"></i> Fino a 15 dipendenti</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Tutto del piano Base</li>
+                        <li><i class="fas fa-check"></i> Ruolo Amministrativo</li>
+                        <li><i class="fas fa-check"></i> Report avanzati</li>
+                        <li><i class="fas fa-check"></i> Personalizzazione tema</li>
+                        <li><i class="fas fa-check"></i> Supporto prioritario</li>
+                    </ul>
+                    <a href="https://workleave-manager-2.preview.emergentagent.com/register" class="btn btn-accent" style="width: 100%;">Inizia Gratis</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Premium</h3>
+                    <div class="price">€19,90<span>/mese</span></div>
+                    <p class="employees"><i class="fas fa-users"></i> Fino a 30 dipendenti</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Tutto del piano Standard</li>
+                        <li><i class="fas fa-check"></i> Multi-amministratore</li>
+                        <li><i class="fas fa-check"></i> Export dati</li>
+                        <li><i class="fas fa-check"></i> Logo personalizzato</li>
+                        <li><i class="fas fa-check"></i> Supporto telefonico</li>
+                    </ul>
+                    <a href="https://workleave-manager-2.preview.emergentagent.com/register" class="btn btn-outline" style="width: 100%;">Inizia Gratis</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">€29,90<span>/mese</span></div>
+                    <p class="employees"><i class="fas fa-users"></i> Dipendenti illimitati</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Tutto del piano Premium</li>
+                        <li><i class="fas fa-check"></i> API integrazione</li>
+                        <li><i class="fas fa-check"></i> Account manager dedicato</li>
+                        <li><i class="fas fa-check"></i> Onboarding personalizzato</li>
+                        <li><i class="fas fa-check"></i> SLA garantito</li>
+                    </ul>
+                    <a href="https://workleave-manager-2.preview.emergentagent.com/register" class="btn btn-outline" style="width: 100%;">Inizia Gratis</a>
+                </div>
+                
+                <div class="pricing-card" style="border-color: #8b5cf6; background: linear-gradient(to bottom, #f5f3ff, var(--white));">
+                    <div class="popular-badge" style="background: #8b5cf6;">Su Misura</div>
+                    <h3>Personalised</h3>
+                    <div class="price" style="font-size: 1.5rem; color: #8b5cf6;">Richiedi un<br>preventivo</div>
+                    <p class="employees"><i class="fas fa-building"></i> Gestione Multi-Filiali</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Tutto del piano Enterprise</li>
+                        <li><i class="fas fa-check"></i> Multi-filiale / Multi-sede</li>
+                        <li><i class="fas fa-check"></i> Dashboard centralizzata</li>
+                        <li><i class="fas fa-check"></i> Configurazione su misura</li>
+                        <li><i class="fas fa-check"></i> Supporto dedicato 24/7</li>
+                    </ul>
+                    <a href="mailto:support@ferie-e-permessi.it?subject=Richiesta%20Preventivo%20Piano%20Personalised&body=Buongiorno%2C%0A%0ASono%20interessato%20al%20piano%20Personalised%20per%20la%20gestione%20multi-filiali.%0A%0AInformazioni%20azienda%3A%0A-%20Nome%20azienda%3A%20%0A-%20Numero%20filiali%3A%20%0A-%20Numero%20totale%20dipendenti%3A%20%0A-%20Esigenze%20specifiche%3A%20%0A%0AContattatemi%20per%20un%20preventivo%20personalizzato.%0A%0AGrazie%2C%0A" class="btn" style="width: 100%; background: #8b5cf6; color: white;">
+                        <i class="fas fa-envelope"></i> Richiedi Preventivo
+                    </a>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 2rem; color: var(--text-muted);">
+                <i class="fas fa-gift" style="color: var(--accent);"></i>
+                Tutti i piani includono <strong>14 giorni di prova gratuita</strong> - Nessuna carta di credito richiesta
+            </p>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Domande Frequenti</h2>
+                <p>Hai dubbi? Trova qui le risposte alle domande più comuni</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Come funziona la prova gratuita?</h3>
+                    <p>Puoi provare tutte le funzionalità per 14 giorni senza inserire alcuna carta di credito. Al termine, scegli il piano più adatto alle tue esigenze.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Posso cambiare piano in qualsiasi momento?</h3>
+                    <p>Sì, puoi fare upgrade o downgrade del tuo piano quando vuoi. Le modifiche saranno effettive dal prossimo ciclo di fatturazione.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Come si registrano i dipendenti?</h3>
+                    <p>I dipendenti possono registrarsi autonomamente usando il codice aziendale che riceverai dopo la registrazione come Titolare.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> I dati sono sicuri?</h3>
+                    <p>Assolutamente sì. Utilizziamo crittografia SSL e i dati sono conservati in data center europei conformi al GDPR.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Quali metodi di pagamento accettate?</h3>
+                    <p>Accettiamo carte di credito/debito (Visa, Mastercard), PayPal e bonifico bancario per i piani mensili.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> È disponibile un'app mobile?</h3>
+                    <p>L'app sarà presto disponibile su Google Play Store, Apple App Store e Microsoft Store. Nel frattempo, la piattaforma web è ottimizzata per dispositivi mobili.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Posso importare i dati dei dipendenti esistenti?</h3>
+                    <p>Sì, offriamo supporto per l'importazione di dati da file Excel o CSV. Contattaci per assistenza.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3><i class="fas fa-question-circle"></i> Come posso ricevere assistenza?</h3>
+                    <p>Puoi contattarci via email a support@ferie-e-permessi.it. Rispondiamo entro 24 ore lavorative.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contatti" class="contact">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Contattaci</h2>
+                <p>Hai domande o hai bisogno di assistenza? Siamo qui per aiutarti</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:support@ferie-e-permessi.it">support@ferie-e-permessi.it</a>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <a href="https://www.ferie-e-permessi.it">www.ferie-e-permessi.it</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://workleave-manager-2.preview.emergentagent.com/register" class="btn btn-accent" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
+                    <i class="fas fa-rocket"></i>
+                    Inizia Ora - È Gratis!
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contatti">Contatti</a>
+        </div>
+        <p>© 2026 Ferie e Permessi by LuiCas™ - Tutti i diritti riservati</p>
+    </footer>
+    
+    <script>
+        // Torna sempre all'inizio della pagina quando si apre il sito
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
+        
+        // Forza scroll in alto al caricamento
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+        
+        // Close mobile menu function
+        function closeMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const navCta = document.querySelector('.nav-cta');
+            navLinks.style.display = '';
+            navCta.style.display = '';
+            menuOpen = false;
+        }
+        
+        let menuOpen = false;
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Close mobile menu first
+                    closeMobileMenu();
+                    
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
+        
+        // Simple mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const navCta = document.querySelector('.nav-cta');
+            
+            if (menuOpen) {
+                closeMobileMenu();
+            } else {
+                menuOpen = true;
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'white';
+                navLinks.style.padding = '1rem';
+                navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                navLinks.style.zIndex = '1000';
+                
+                navCta.style.display = 'flex';
+                navCta.style.flexDirection = 'column';
+                navCta.style.position = 'absolute';
+                navCta.style.top = 'calc(100% + 220px)';
+                navCta.style.left = '0';
+                navCta.style.right = '0';
+                navCta.style.background = 'white';
+                navCta.style.padding = '1rem';
+                navCta.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                navCta.style.zIndex = '1000';
+            }
+        }
+    </script>
+</body>
+</html>
